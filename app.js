@@ -35,12 +35,12 @@ app.use("/api/v1", user);
 app.use("/api/v1", payment);
 app.use("/api/v1", other);
 
-export default app;
+// app.get("/", (req, res) =>
+//   res.send(
+//     `<h1>Site i working . click to <a href=${process.env.FRONTEND_URL}></a> visit frontend</h1>`
+//   )
+// );
 
-app.get("/", (req, res) =>
-  res.send(
-    `<h1>Site i working . click to <a href=${process.env.FRONTEND_URL}></a> visit frontend</h1>`
-  )
-);
+export default app;
 
 app.use(ErrorMiddleware);
