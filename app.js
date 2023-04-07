@@ -17,7 +17,7 @@ app.use(
 );
 app.use(cookieParser());
 
-app.ue(
+app.use(
   cors({
     origin: process.env.FRONTEND_URL,
     credentials: true,
@@ -35,12 +35,12 @@ app.use("/api/v1", user);
 app.use("/api/v1", payment);
 app.use("/api/v1", other);
 
-// app.get("/", (req, res) =>
-//   res.send(
-//     `<h1>Site i working . click to <a href=${process.env.FRONTEND_URL}></a> visit frontend</h1>`
-//   )
-// );
-
 export default app;
+
+app.get("/", (req, res) =>
+  res.send(
+    `<h1>Site i working . click to <a href=${process.env.FRONTEND_URL}></a> visit frontend</h1>`
+  )
+);
 
 app.use(ErrorMiddleware);
