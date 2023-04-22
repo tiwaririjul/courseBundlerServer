@@ -68,7 +68,7 @@ export const login = catchAsyncError(async (req, res, next) => {
     return next(new ErrorHandler("Please Enter all field", 400));
   }
 
-  console.log(email, email);
+  console.log("email ", email, "password ", password);
 
   const user = await User.findOne({ email }).select("+password");
 
