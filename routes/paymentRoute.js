@@ -2,7 +2,8 @@ import express from "express";
 import {
   buySubscription,
   cancelSubscription,
-  // getRazorPayKey,
+  getRazorPayKey,
+  rijul,
   paymentVerification,
 } from "../controllers/paymentController.js";
 import { isAuthenticated } from "../middlewares/auth.js";
@@ -18,7 +19,8 @@ router.route("/paymentverification").post(isAuthenticated, paymentVerification);
 
 // get razorpay key
 
-// router.route("/razorpaykey").get(isAuthenticated, getRazorPayKey);
+router.route("/razorpaykey").get(isAuthenticated, getRazorPayKey);
+router.route("/rijul").get(isAuthenticated, rijul);
 
 // cancel subcription
 

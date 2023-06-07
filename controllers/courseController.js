@@ -27,6 +27,14 @@ export const getAllCourses = catchAsyncError(async (req, res, next) => {
   });
 });
 
+export const rijul = catchAsyncError(async (req, res, next) => {
+  console.log("hey i am there");
+  res.status(200).json({
+    success: true,
+    message: "hey i am here",
+  });
+});
+
 export const createCourse = catchAsyncError(async (req, res, next) => {
   const { title, description, category, createdBy } = req.body;
 

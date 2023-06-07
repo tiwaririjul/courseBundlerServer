@@ -223,6 +223,8 @@ export const resetPassword = catchAsyncError(async (req, res, next) => {
   user.resetPasswordToken = undefined;
   user.resetPasswordExpire = undefined;
 
+  await user.save();
+
   res.status(200).json({
     success: true,
     message: "Passward changed Successfully",

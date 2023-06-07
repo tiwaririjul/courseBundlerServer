@@ -68,6 +68,22 @@ export const paymentVerification = catchAsyncError(async (req, res, next) => {
   );
 });
 
+export const getRazorPayKey = catchAsyncError(async (req, res, next) => {
+  console.log("i am there");
+  res.status(200).json({
+    success: true,
+    key: process.env.RAZORPAY_API_KEY,
+  });
+});
+
+export const rijul = catchAsyncError(async (req, res, next) => {
+  console.log("i am there");
+  res.status(200).json({
+    success: true,
+    message: "yes i am there",
+  });
+});
+
 export const cancelSubscription = catchAsyncError(async (req, res, next) => {
   const user = await User.findById(req.user._id);
 
