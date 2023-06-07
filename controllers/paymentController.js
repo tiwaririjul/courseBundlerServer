@@ -3,6 +3,7 @@ import ErrorHandler from "../utils/errorHandler.js";
 import { instance } from "../server.js";
 import { User } from "../models/User.js";
 import { Payment } from "../models/payment.js";
+import crypto from "crypto";
 
 export const buySubscription = catchAsyncError(async (req, res, next) => {
   const user = await User.findById(req.user._id);
@@ -60,6 +61,8 @@ export const paymentVerification = catchAsyncError(async (req, res, next) => {
   });
 
   user.subscription.status = "active";
+
+  console.log("reached");
 
   await user.save();
 
