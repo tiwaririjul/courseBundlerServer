@@ -3,6 +3,7 @@ import {
   contact,
   courseRequest,
   getDashboardStats,
+  getWork,
 } from "../controllers/otherController.js";
 
 import { isAuthenticated } from "../middlewares/auth.js";
@@ -12,6 +13,8 @@ const router = express.Router();
 // contact form
 
 router.route("/contact").post(contact);
+
+router.route("/bhai").get(getWork);
 
 // request form
 

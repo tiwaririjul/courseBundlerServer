@@ -38,6 +38,9 @@ export const courseRequest = catchAsyncError(async (req, res, next) => {
     message: "Your request  has been sent",
   });
 });
+export const getWork = catchAsyncError(async (req, res, next) => {
+  res.json({ message: "hii" });
+});
 export const getDashboardStats = catchAsyncError(async (req, res, next) => {
   const stats = await Stats.find({}).sort({ createdAt: "desc" }).limit(12);
   console.log(1);

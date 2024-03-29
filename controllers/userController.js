@@ -62,6 +62,7 @@ export const register = catchAsyncError(async (req, res, next) => {
 // });
 
 export const login = catchAsyncError(async (req, res, next) => {
+  console.log("hii");
   const { email, password } = req.body;
 
   if (!email || !password) {

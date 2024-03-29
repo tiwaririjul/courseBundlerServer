@@ -6,6 +6,8 @@ import { Payment } from "../models/payment.js";
 import crypto from "crypto";
 
 export const buySubscription = catchAsyncError(async (req, res, next) => {
+  console.log("id ", req.cookies.token);
+  console.log("here");
   const user = await User.findById(req.user._id);
 
   if (user.role === "admin") {
@@ -66,9 +68,11 @@ export const paymentVerification = catchAsyncError(async (req, res, next) => {
 
   await user.save();
 
-  res.redirect(
+  console.log(
     `${process.env.FRONTEND_URL}/paymentsucess?reference=${razorpay_payment_id}`
   );
+
+  res.redirect(`${process.env.FRONTEND_URL}/paymentsuccess`);
 });
 
 export const getRazorPayKey = catchAsyncError(async (req, res, next) => {
@@ -88,6 +92,7 @@ export const rijul = catchAsyncError(async (req, res, next) => {
 });
 
 export const cancelSubscription = catchAsyncError(async (req, res, next) => {
+  console.log("cancel sub");
   const user = await User.findById(req.user._id);
 
   console.log("user", user);
@@ -114,6 +119,8 @@ export const cancelSubscription = catchAsyncError(async (req, res, next) => {
 
   if (refundTime > gap) {
     await instance.payments.refund(payment.razorpay_payment_id);
+  } else {
+    refund = true;
   }
 
   await payment.remove();
@@ -121,12 +128,14 @@ export const cancelSubscription = catchAsyncError(async (req, res, next) => {
   user.subscription.id = undefined;
   user.subscription.status = undefined;
 
+  console.log("end", refund);
+
   await user.save();
 
   await res.status(200).json({
     success: true,
     message: refund
       ? "Subscription cancelled , You will receive full refund withi 7 days. "
-      : "Subscription cancelled , Now refund initiated as subscription was cancelled after 7 days  ",
+      : "Subscription cancelled , Now refund initiated as subscription was cancelled after 7 days",
   });
 });

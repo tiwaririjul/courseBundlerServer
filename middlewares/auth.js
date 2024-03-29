@@ -4,9 +4,8 @@ import { catchAsyncError } from "./catchAssyncError.js ";
 import { User } from "../models/User.js";
 
 export const isAuthenticated = catchAsyncError(async (req, res, next) => {
+  // console.log("passed");
   const { token } = req.cookies;
-
-  console.log("logged in token", token);
 
   if (!token) return next(new ErrorHandler("Not Logged In", 401));
 
@@ -15,16 +14,13 @@ export const isAuthenticated = catchAsyncError(async (req, res, next) => {
     "fgnfgrygdhucrjehfuyjehgurjyhdgfujhbfhbrgnfjbgjrbfhg"
   );
 
-  console.log("decoded data", decoded);
-
   req.user = await User.findById(decoded._id);
 
   next();
 });
 
 export const authorizeRoles = (req, res, next) => {
-  console.log(req.user);
-  if (req.user.role != "admin") {
+  if (req.user.role != "admin" || req.user == null) {
     return next(
       new ErrorHandler(
         `${req.user.role} is not allowed to access this resource`,
@@ -37,7 +33,7 @@ export const authorizeRoles = (req, res, next) => {
 };
 
 export const authorizeSubscribers = (req, res, next) => {
-  console.log(req.user);
+  console.log(req.user, "passed ");
   if (req.user.subscription.status !== "active" && req.user.role !== "admin") {
     return next(
       new ErrorHandler(`Only Subscriber can access this resource`, 403)

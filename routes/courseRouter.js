@@ -24,11 +24,12 @@ router.route("/courses").get(getAllCourses);
 router
   .route("/createcourse")
   .post(isAuthenticated, authorizeRoles, singleUpload, createCourse);
+// .post(createCourse);
 
 // add lectures , delete course , get course detail
 
 router
-  .route("/course/:id")
+  .route("/courses/:id")
   .get(isAuthenticated, authorizeSubscribers, getCourseLectures)
   .post(isAuthenticated, authorizeRoles, singleUpload, addLecture)
   .delete(isAuthenticated, authorizeRoles, deleteCourse);
